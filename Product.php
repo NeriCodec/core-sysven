@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Dux-044
- * Date: 23/11/2017
- * Time: 02:51 PM
- */
 
 namespace App;
 
@@ -17,5 +11,10 @@ class Product extends Model
     protected $primaryKey = 'id';
 
     public $timestamps = false;
+
+    public function productInputs()
+    {
+        return $this->hasMany(ProductCreate::class, 'products_id');
+    }
 
 }

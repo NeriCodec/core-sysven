@@ -12,7 +12,7 @@ namespace Tests\Unit;
 use App\src\Common\Entities\ProductEntity;
 use App\src\Data\ProductRepository;
 use App\src\Service\ProductUseCase;
-use Tests\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class ProductTest extends TestCase
 {

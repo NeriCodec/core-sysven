@@ -4,10 +4,9 @@ namespace Tests\Unit;
 
 use App\src\Common\Entities\SaleEntity;
 use App\src\Data\SaleRepository;
-use App\src\Service\SaleRepositoryCommand;
 use App\src\Service\SaleUseCase;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\TestCase;
+
 
 class SaleTest extends TestCase
 {

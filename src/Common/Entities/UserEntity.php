@@ -13,7 +13,7 @@ class UserEntity
 {
     public $user;
     public $password;
-    public $created_date;
+    public $created_at;
 
     /**
      * UserEntity constructor.
@@ -21,11 +21,11 @@ class UserEntity
      * @param $password
      * @param $created_date
      */
-    public function __construct($user, $password, $created_date)
+    public function __construct($user, $password, $created_at)
     {
-        $this->user = $user;
-        $this->password = $password;
-        $this->created_date = $created_date;
+        $this->user       = $user;
+        $this->password   = $password;
+        $this->created_at = $created_at;
     }
 
     /**
@@ -47,12 +47,10 @@ class UserEntity
     /**
      * @return mixed
      */
-    public function getCreatedDate()
+    public function getCreatedAt()
     {
-        return $this->created_date;
+        return $this->created_at;
     }
-
-
 
 
 }

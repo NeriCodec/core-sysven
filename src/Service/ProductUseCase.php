@@ -1,20 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Dux-044
- * Date: 23/11/2017
- * Time: 02:44 PM
- */
 
 namespace App\src\Service;
 
 
 use App\src\Common\Entities\ProductEntity;
 use App\src\Common\Interfaces\IProductRepository;
+use App\src\Data\ProductCreateRepository;
 
-class ProductUseCase implements IProductRepository
+class ProductUseCase
+    implements IProductRepository
 {
-    public $productRepository;
+    private $productRepository;
 
     /**
      * ProductUseCase constructor.
@@ -28,28 +24,87 @@ class ProductUseCase implements IProductRepository
     /**
      * registerProduct function.
      * @param $productEntity
+     * @return boolean
      */
-    public function registerProduct(ProductEntity $productEntity)
+    public function create(ProductEntity $productEntity)
     {
-        return $this->productRepository->registerProduct($productEntity);
+        if (count($productEntity->inputs) <= 0) {
+            return false;
+        }
+
+        return $this->productRepository->create($productEntity);
     }
 
     /**
-     * updateProduct function.
+     * update function.
      * @param $productEntity
-     * @param $id
+     * @return bool
      */
-    public function updateProduct(ProductEntity $productEntity, $id)
+    public function update(ProductEntity $productEntity)
     {
-        // TODO: Implement updateProduct() method.
+        return $this->productRepository->update($productEntity);
     }
 
     /**
-     * deleteProduct function.
+     * delete function.
      * @param $id
      */
-    public function deleteProduct($id)
+    public function delete($id)
     {
-        // TODO: Implement deleteProduct() method.
+        return $this->productRepository->delete($id);
     }
+
+    /**
+     * getProductById function.
+     * @param $id
+     */
+    public function getProductById($id)
+    {
+        return $this->productRepository->getProductById($id);
+    }
+
+    /**
+     * read function.
+     * @return array
+     */
+    public function getAll()
+    {
+        return $this->productRepository->getAll();
+    }
+
+    public function getProductByName($productName)
+    {
+        return $this->productRepository->getProductByName($productName);
+    }
+
+
+    /**
+     * getAllProductsWithInputs function.
+     * @return array
+     */
+    public function getAllProductsWithInputs()
+    {
+        $productsWithInputs   = [];
+        $productCreateUseCase = new ProductCreateUseCase(new ProductCreateRepository());
+
+        foreach ($this->getAll() as $product) {
+            $productEntity = new ProductEntity(
+                $product->id,
+                $product->name,
+                $product->price,
+                $productCreateUseCase->getAllInputsOfProduct($product->id)
+            );
+
+            array_unshift($productsWithInputs, $productEntity);
+        }
+
+        return $productsWithInputs;
+    }
+
+    public function search($productName)
+    {
+        return $this->productRepository->search($productName);
+    }
+
+
 }

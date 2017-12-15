@@ -2,30 +2,21 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use Notifiable;
-
     protected $table = 'users';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $primaryKey = 'id';
+
+    public $timestamps = false;
 
     /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
+     * Obtiene todas las ventas de un usuario.
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    public function sales()
+    {
+        return $this->hasMany('App\Sale', 'users_id');
+    }
 }

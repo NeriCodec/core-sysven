@@ -5,7 +5,8 @@ namespace App\src\Service;
 use App\src\Common\Entities\SaleEntity;
 use App\src\Common\Interfaces\ISaleRepository;
 
-class SaleUseCase implements ISaleRepository
+class SaleUseCase
+    implements ISaleRepository
 {
     private $saleRepository;
 

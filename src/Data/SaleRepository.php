@@ -5,8 +5,10 @@ namespace App\src\Data;
 use App\Sale;
 use App\src\Common\Entities\SaleEntity;
 use App\src\Common\Interfaces\ISaleRepository;
+use Illuminate\Support\Facades\DB;
 
-class SaleRepository implements ISaleRepository
+class SaleRepository
+    implements ISaleRepository
 {
 
     public function removeMoney($amount)
@@ -18,10 +20,9 @@ class SaleRepository implements ISaleRepository
     {
         $sale = new Sale;
 
-        $sale->num_articles = $saleEntity->getNumArticles();
-        $sale->total = $saleEntity->getTotal();
-        $sale->detail = $saleEntity->getDetail();
-        $sale->users_id = $saleEntity->getUserId();
+        $sale->total      = $saleEntity->getTotal();
+        $sale->created_at = $saleEntity->getCreatedAt();
+        $sale->users_id   = $saleEntity->getUserId();
 
         return $sale->save();
 
@@ -36,4 +37,5 @@ class SaleRepository implements ISaleRepository
     {
         // TODO: Implement getAllSaleByDate() method.
     }
+
 }
